@@ -1,0 +1,16 @@
+Retrieval hit rate (page): 100%
+Fact in chunks (stricter):  94%
+Answer correctness:         50%
+Refusal rate:               75%
+Leak rate:                  100%
+
+
+v1 
+baseline
+- chunk size = 600, chunk overlap = 100
+- embedding model = nomic
+- simple system prompt 
+- temp = 0.1
+- top_k = 3
+- model = gemma3 : 1b
+- score_threshold = 0.5

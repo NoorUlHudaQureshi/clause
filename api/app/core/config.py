@@ -38,6 +38,7 @@ class Settings(BaseSettings):
 
     # Retrieval
     top_k: int = 3
+    score_threshold: float = 0.5
 
     # Qdrant
     collection: str = "shop_handbook"  # table
