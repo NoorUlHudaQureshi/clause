@@ -1,3 +1,19 @@
 .venv
 .env
 qdrant_data/
+# OS / editor
+.DS_Store
+.vscode/
+.idea/
+
+# Python
+__pycache__/
+*.py[oc]
+.ipynb_checkpoints/
+.venv/
+
+# Secrets
+.env
+
+# Vector database (rebuilt by ingest)
+vector_stores/

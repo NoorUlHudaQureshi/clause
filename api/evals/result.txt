@@ -1,11 +1,3 @@
-Retrieval hit rate (page): 100%
-Fact in chunks (stricter):  94%
-Answer correctness:         50%
-Refusal rate:               75%
-Leak rate:                  100%
-
-
-v1 
 baseline
 - chunk size = 600, chunk overlap = 100
 - embedding model = nomic
@@ -14,3 +6,82 @@ baseline
 - top_k = 3
 - model = gemma3 : 1b
 - score_threshold = 0.5
+
+
+v1 
+Results:
+Retrieval hit rate (page): 100%
+Fact in chunks (stricter):  94%
+Answer correctness:         50%
+Refusal rate:               75%
+Leak rate:                  100%
+
+
+v2 -- Improve system prompt + prompt template ?
+Results:
+Retrieval hit rate (page): 75%
+Fact in chunks (stricter):  75%
+Answer correctness:         38%
+Refusal rate:               100%
+Leak rate:                  50%
+
+
+v3 -- temp = 0
+Results:
+Retrieval hit rate (page): 75%
+Fact in chunks (stricter):  75%
+Answer correctness:         44%
+Refusal rate:               100%
+Leak rate:                  100%
+
+v4 -- change model .. gemma3:1b -> gema3:4b/ gemma4:e4b or qwen 3.5:4b or gemini-3.5-flash-lite
+
+Results:
+Retrieval hit rate (page): 75%
+Fact in chunks (stricter):  75%
+Answer correctness:         62%
+Refusal rate:               100%
+Leak rate:                  100%
+
+uv add langchain-google-genai google-genai
+
+
+
+v5 -- top_k = 2 --- optional
+Results:
+Retrieval hit rate (page): 75%
+Fact in chunks (stricter):  75%
+Answer correctness:         62%
+Refusal rate:               100%
+Leak rate:                  100%
+
+v6 -- Leak rate -- ingestion -- staff only chunk (discard)
+
+Retrieval hit rate (page): 75%
+Fact in chunks (stricter):  75%
+Answer correctness:         62%
+Refusal rate:               100%
+Leak rate:                  100%
+ 
+v6 -- dataset 50 test cases (add customer complex questions like trick, prompt injection)
+golden_v2.jsonL
+Results:
+Retrieval hit rate (page): 72%
+Fact in chunks (stricter):  78%
+Answer correctness:         67%
+Refusal rate:               100%
+Leak rate:                  60%
+
+make complete excel file by chatgpt after completing all stages.
+
+- install package
+uv add fastembed
+
+Hybrid Search - 
+- Dense Search
+- BM25
+--- backend--
+Fusion Score (RRF- Reciprocal Rank Fusion)
+
+
+uv run python -m evals.run

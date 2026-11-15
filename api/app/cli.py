@@ -1,4 +1,3 @@
-# from app.services.ingestion import ingest
 from app.services.chat import RAGService
 
 
@@ -7,32 +6,38 @@ def main():
     try:
         query = input("You: ").strip()
         result = rag_service.ask(query)
-
-        # if result.sources:
-        #     pass
-
         print(f"AI: {result.answer}")
 
+        if result.sources:
+            print("Sources:")
+            for s in result.sources:
+                print(f" - {s.source} (page {s.page}, score {s.score})")
 
-
+    except ValueError as e:
+        print(f"Error: {e}")
     except (KeyboardInterrupt, EOFError):
-        pass
+        print()
+    except Exception as e:
+        print(f"Something went wrong: {e}")
     finally:
         rag_service.close()
 
 
 if __name__ == "__main__":
-    # print(f"Ingested {ingest()} chunks!")
     main()
 
 
+# cd api
+# uv run python -m app.cli
 
 
 
 
 
-# Pinecone, Pgvector, Milvas, Qdrant, Weviate
-# Chroma, Faiss
 
-# Packages to Install:
-# uv add langchain langchain-core langchain-text-splitters langchain-ollama pydantic pydantic-settings langchain-qdrant langchian-client langchain-community pypdf
+
+# # Pinecone, Pgvector, Milvas, Qdrant, Weviate
+# # Chroma, Faiss
+
+# # Packages to Install:
+# # uv add langchain langchain-core langchain-text-splitters langchain-ollama pydantic pydantic-settings langchain-qdrant langchian-client langchain-community pypdf
