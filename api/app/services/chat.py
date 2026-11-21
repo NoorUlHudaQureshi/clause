@@ -58,10 +58,10 @@ class RAGService():
         if not results:
             return Answer(answer=NO_ANSWER, sources=[])
 
-        context = "\n\n".join(doc.page_content for doc, _ in results)
+        context = "\n\n".join(doc.page_content for doc, _ in results) # string Object
 # Prompt Template
         messages = [
-            {"role": "system", "content": self.settings.system_prompt},
+            {"role": "system", "content": "" }, # self.settings.system_prompt
             # {"role": "user", "content": f"Context:\n{context}\n\nQuestion: {question}"},
             {"role": "user", "content": f"Handbook text:\n{context}\n\nCustomer question: {question}"},
         ]
