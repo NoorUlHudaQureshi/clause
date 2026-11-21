@@ -18,7 +18,7 @@ def main() -> None:
             for q in result["searches"]:
                 print(f" searched : {q}")
             for s in result["sources"]:
-                print(f"source: page {s['page']} (score {s['score']})")
+                print(f"source: page {s.page} (score {s.score})")
    
     except (KeyboardInterrupt, EOFError):
         pass

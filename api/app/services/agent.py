@@ -12,6 +12,7 @@ from app.prompts.loaders import get_prompt
 from app.llm.models import get_chat_model, get_fallback_model
 from app.rag.vectorstore import get_vector_store
 from app.tools.knowledge.handbook import file_search
+from app.middleware.stacks import default_stack
 
 # conn = sqlite3.connect(database="memory.db", check_name_thread=False)
 # checkpointer = SqliteSaver(conn)
@@ -26,7 +27,8 @@ class ClauseAgent:
         model=get_chat_model(settings=self.settings),
         tools=[file_search(store=self.store, top_k=self.settings.top_k)
         ],
-        system_prompt=get_prompt(name="support/system", version=self.settings.system_prompt_version),
+        system_prompt=get_prompt(name="support/system", verison=self.settings.system_prompt_version),
+        middleware=default_stack(settings=self.settings)
         # checkpointer=checkpointer
         
         )

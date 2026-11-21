@@ -1,9 +1,10 @@
-from langchain.tools import tool
+from langchain_core.tools import BaseTool, tool
 from langchain_qdrant import QdrantVectorStore
 
 from app.schemas.retrieval import Source
 
-def file_search( store: QdrantVectorStore, top_k: int) -> Basetool:
+
+def file_search(store: QdrantVectorStore, top_k: int) -> BaseTool:
     @tool(response_format="content_and_artifact")
     def search_handbook(query: str) -> None:
         """Search the Clause shop handbook for passages relevant to the query.
