@@ -1,43 +1,31 @@
-from app.services.chat import RAGService
+from app.services.agent import ClauseAgent
 
-
-def main():
-    rag_service = RAGService()
+def main() -> None:
+    clause_agent = ClauseAgent()
     try:
-        query = input("You: ").strip()
-        result = rag_service.ask(query)
-        print(f"AI: {result.answer}")
+        thread_id = input("Conversation name: ")
 
-        if result.sources:
-            print("Sources:")
-            for s in result.sources:
-                print(f" - {s.source} (page {s.page}, score {s.score})")
+        while True:
+            query = input("You: ").strip()
+            if not query:
+                continue
+            if query.lower() in {"quit", "bye", "exit"}:
+                break
+            
+            result = clause_agent.ask(question=query, thread_id=thread_id)
+            print(f"AI: {result['answer']}")
 
-    except ValueError as e:
-        print(f"Error: {e}")
+            for q in result["searches"]:
+                print(f" searched : {q}")
+            for s in result["sources"]:
+                print(f"source: page {s['page']} (score {s['score']})")
+   
     except (KeyboardInterrupt, EOFError):
-        print()
-    except Exception as e:
-        print(f"Something went wrong: {e}")
+        pass
+   
     finally:
-        rag_service.close()
+        clause_agent.close()
 
 
 if __name__ == "__main__":
     main()
-
-
-# cd api
-# uv run python -m app.cli
-
-
-
-
-
-
-
-# # Pinecone, Pgvector, Milvas, Qdrant, Weviate
-# # Chroma, Faiss
-
-# # Packages to Install:
-# # uv add langchain langchain-core langchain-text-splitters langchain-ollama pydantic pydantic-settings langchain-qdrant langchian-client langchain-community pypdf
